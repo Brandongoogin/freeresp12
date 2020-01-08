@@ -7,15 +7,42 @@ public class ErrorLog {
 
     /** Precondition: message is a valid Error log entry */
     public ErrorLog(String message) {
-        /* part a */
-   }
+        int x = message.indexOf(":") + 1;
+        machineId = message.substring(0, x);
+        description = message.substring(x);
+    }
+
+
 
    /** Returns true if the description in this error log entry
 //     * contains keyword; false otherwise.
 //     */
     public boolean containsKey(String keyword) {
-
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        String compare = keyword + " ";
+        boolean r = false;
+        String d = " ";
+        for (int i = 0; i <= description.length(); i++) {
+            x = description.indexOf("disk ", i);
+            //y = description.indexOf("disk", i);
+            z = description.lastIndexOf(" " + keyword);
+            int total = description.length() - z;
+            if (z!=-1){
+                if (total-keyword.length()-1==0){
+                    r=true;
+                    break;
+                }
+            }
+            if (x != -1) {
+                r = true;
+                break;
+            }
+        }
+        return r;
     }
+
 
     public String getMachineId() { return machineId;}
     public String getDescription() { return description; }
